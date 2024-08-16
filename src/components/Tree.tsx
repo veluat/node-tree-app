@@ -1,7 +1,7 @@
 import { TreeItem } from "@mui/x-tree-view";
 import { ControlPanel } from "./ControlPanel";
 import { TreeNodeType } from "../app/App";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 interface TreeProps {
     nodes: TreeNodeType;
@@ -11,62 +11,45 @@ interface TreeProps {
 }
 
 export const Tree: React.FC<TreeProps> = ({
-                                              nodes,
-                                              isRoot,
-                                              nodeId,
-                                              parentId
+                                            nodes,
+                                            isRoot,
+                                            nodeId,
+                                            parentId,
                                           }) => {
-    const [activeItem, setActiveItem] = useState<string | null>(null);
-    const nodeRef = useRef<HTMLDivElement>(null);
+  const [activeItemId, setActiveItemId] = useState<string | null>(null);
+  const nodeRef = useRef<HTMLDivElement>(null);
 
-    const handleItemClick = (itemId: string) => {
-        setActiveItem(itemId);
-    };
+  const handleItemClick = (itemId: string) => {
+    setActiveItemId(itemId);
+  };
 
-    const handleClickOutside = (event: MouseEvent) => {
-        if (
-            activeItem &&
-            nodeRef.current &&
-            !nodeRef.current.contains(event.target as Node)
-        ) {
-            setActiveItem(null);
+  return (
+    <div>
+      <TreeItem
+        key={nodes.id}
+        nodeId={nodes.id}
+        label={
+          <div style={{ display: 'flex', alignItems: 'center' }} ref={nodeRef}>
+            {nodes.name}
+            {activeItemId === nodes.id ? (
+              <ControlPanel isRoot={isRoot} nodeName={nodes.name} nodeId={nodeId} parentId={nodes.id} />
+            ) : null}
+          </div>
         }
-    };
-
-    useEffect(() => {
-        document.addEventListener("click", handleClickOutside);
-        return () => {
-            document.removeEventListener("click", handleClickOutside);
-        };
-    }, [activeItem]);
-
-    return (
-        <div>
-            <TreeItem
-                key={nodes.id}
-                nodeId={nodes.id}
-                label={
-                    <div style={{ display: "flex", alignItems: "center" }} ref={nodeRef}>
-                        {nodes.name}
-                        {activeItem === nodes.id ? (
-                            <ControlPanel isRoot={isRoot} nodeName={nodes.name} nodeId={nodeId} parentId={nodes.id}/>
-                        ) : null}
-                    </div>
-                }
-                onClick={() => handleItemClick(nodes.id)}
-            >
-                {Array.isArray(nodes.children)
-                    ? nodes.children.map((child) => (
-                        <Tree
-                            key={child.id}
-                            nodes={child}
-                            isRoot={false}
-                            nodeId={child.id}
-                            parentId={nodes.id}
-                        />
-                    ))
-                    : null}
-            </TreeItem>
-        </div>
-    );
-}
+        onClick={() => handleItemClick(nodes.id)}
+      >
+        {Array.isArray(nodes.children) ? (
+          nodes.children.map((child) => (
+            <Tree
+              key={child.id}
+              nodes={child}
+              isRoot={false}
+              nodeId={child.id}
+              parentId={nodes.id}
+            />
+          ))
+        ) : null}
+      </TreeItem>
+    </div>
+  );
+};

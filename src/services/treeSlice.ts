@@ -7,13 +7,17 @@ export interface Node {
 }
 export interface TreeState {
     treeData: Node[];
-    errorMessage: string | null;
 }
 export const treeSlice = createSlice({
     name: "tree",
     initialState: {
-        treeData: [],
-        errorMessage: null,
+        treeData: [
+            {
+                id: '1',
+                name: 'Root',
+                children: [],
+            },
+        ],
     } as TreeState,
     reducers: {
         setTreeData: (state, action) => {
@@ -41,17 +45,21 @@ export const checkIfNodeHasChildren = (treeData: Node[], nodeId: string): boolea
             if (node.id === nodeId && node.children && node.children.length > 0) {
                 return true;
             }
-            if (node.children && findNode(node.children)) {
-                return true;
+            if (node.children) {
+                // Рекурсивно вызываем findNode для дочерних узлов
+                if (findNode(node.children)) {
+                    return true;
+                }
             }
         }
         return false;
     };
 
+    // Вызываем функцию findNode с исходным массивом treeData
     return findNode(treeData);
 };
 
-const deleteNodeFromTree = (treeData: Node[], nodeId: string): Node[] => {
+ const deleteNodeFromTree = (treeData: Node[], nodeId: string): Node[] => {
     const hasChildren = treeData.some((node) => node.id === nodeId && node.children);
     if (hasChildren) {
         return treeData.map((node) =>
@@ -74,7 +82,7 @@ const deleteNodeFromTree = (treeData: Node[], nodeId: string): Node[] => {
     });
 };
 
-const addNodeToTree = (treeData: Node[], parentId: string, newNode: Node): Node[] => {
+ const addNodeToTree = (treeData: Node[], parentId: string, newNode: Node): Node[] => {
     return treeData.map((node) => {
         if (node.id === parentId) {
             if (node.children) {
@@ -98,7 +106,7 @@ const addNodeToTree = (treeData: Node[], parentId: string, newNode: Node): Node[
     });
 };
 
-const renameNodeInTree = (treeData: Node[], nodeId: string, newName: string): Node[] => {
+ const renameNodeInTree = (treeData: Node[], nodeId: string, newName: string): Node[] => {
     return treeData.map((node) => {
         if (node.id === nodeId) {
             return {
@@ -115,5 +123,5 @@ const renameNodeInTree = (treeData: Node[], nodeId: string, newName: string): No
     });
 };
 
-export const { setTreeData } = treeSlice.actions;
-export default treeSlice.reducer;
+export const { setTreeData, deleteNode, addNode, renameNode } = treeSlice.actions;
+export const treeReducer = treeSlice.reducer;
