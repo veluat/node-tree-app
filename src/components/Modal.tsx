@@ -9,7 +9,7 @@ import style from "./Modal.module.scss";
 import { selectTreeData, store } from "../app/store";
 import { v4 as uuidv4 } from "uuid";
 import {useDispatch} from 'react-redux'
-import {addNode, checkIfNodeHasChildren, deleteNode, renameNode} from '../services/treeSlice'
+import {addNode, checkIfNodeHasChildren, deleteNode, renameNode} from '../app/model/treeSlice'
 
 type ModalProps = {
     open: boolean;
