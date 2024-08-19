@@ -4,7 +4,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import React, {useState} from 'react'
 import {TreeView} from '@mui/x-tree-view'
 import {Tree} from '../components/tree/Tree'
-import {RootState} from './store'
+import {RootState} from './store/store'
 import {useSelector} from 'react-redux'
 import {Node} from './model/treeSlice'
 
