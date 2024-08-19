@@ -36,7 +36,7 @@ export const Modal: React.FC<ModalProps> = ({
   const dispatch = useDispatch()
   const treeData = selectTreeData(store.getState())
 
-  const handleClose = (event: React.SyntheticEvent, reason: string) => {
+  const handleClose = (reason: string) => {
     if (reason !== 'backdropClick') {
       setOpen(false)
     }
