@@ -1,7 +1,7 @@
 import {TreeItem} from '@mui/x-tree-view'
-import {ControlPanel} from './ControlPanel'
+import {ControlPanel} from '../control-panel/ControlPanel'
 import React, {useRef} from 'react'
-import { Node } from '../app/model/treeSlice';
+import {Node} from '../../app/model/treeSlice'
 import s from './Tree.module.scss'
 
 interface TreeProps {
@@ -34,7 +34,8 @@ export const Tree: React.FC<TreeProps> = ({
           <div style={{display: 'flex', alignItems: 'center'}} ref={nodeRef}>
             {nodes.name}
             {activeItemId === nodes.id && (
-              <ControlPanel isRoot={parentId === undefined} nodeName={nodes.name} nodeId={nodes.id} parentId={nodes.id}/>)}
+              <ControlPanel isRoot={parentId === undefined} nodeName={nodes.name} nodeId={nodes.id}
+                            parentId={nodes.id}/>)}
           </div>
         }
         onClick={() => handleItemClick(nodes.id)}

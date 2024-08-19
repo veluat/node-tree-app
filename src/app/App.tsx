@@ -3,13 +3,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import React, {useState} from 'react'
 import {TreeView} from '@mui/x-tree-view'
-import {Tree} from '../components/Tree'
+import {Tree} from '../components/tree/Tree'
 import {RootState} from './store'
 import {useSelector} from 'react-redux'
 import {Node} from './model/treeSlice'
 
 export function App() {
-  const treeData = useSelector((state: RootState) => state.tree.treeData);
+  const treeData = useSelector((state: RootState) => state.tree.treeData)
   const [activeItemId, setActiveItemId] = useState<string | null>(null)
 
   return (
