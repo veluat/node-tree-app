@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# Это мини-приложение представляет собой деревовидную структуру данных, где каждый узел представляет собой объект с именем и идентификатором. Узлы могут иметь потомков, образуя иерархическую структуру.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+## Функциональность:
 
-## Available Scripts
+**Создание дерева:** 
+- Приложение инициализируется с корневым узлом "Root".
+**Добавление узлов:**
+- Пользователь может добавлять новые узлы к дереву, задавая родительский узел и имя нового узла.
+**Удаление узлов:**
+- Пользователь может удалять узлы из дерева. При удалении узла с потомками, сначала удаляются все его потомки, а затем сам узел.
 
-In the project directory, you can run:
+!alt[панель управления](src/assets/tree-3.gif)
 
-### `yarn start`
+**Переименование узлов:**
+- Пользователь может переименовывать узлы, задавая новый идентификатор и имя.
+**Визуализация дерева:**
+- Дерево отображается в виде иерархической структуры с помощью компонента TreeView из библиотеки Material UI.
+**Панель управления:**
+- При выборе узла появляется панель управления, которая позволяет переименовывать узел, удалять его или добавлять к нему нового потомка.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+!alt[панель управления](src/assets/tree-2.jpg)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Использование:
 
-### `yarn test`
+**Приложение может использоваться для представления различных иерархических данных, таких как:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Организационная структура:**
+- Представление сотрудников в компании с их подчиненными.
+**Файловая система:**
+- Представление файлов и папок в файловой системе.
+**Данные о проектах:**
+- Представление задач и подзадач в проекте.
 
-### `yarn build`
+!alt[иерархия](src/assets/tree-1.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Заключение:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Данное мини-приложение предоставляет удобный инструмент для работы с иерархическими данными. 
+Оно позволяет создавать, редактировать и удалять узлы в дереве, а также визуализировать его структуру.**
